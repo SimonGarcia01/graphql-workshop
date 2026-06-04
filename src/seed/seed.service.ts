@@ -45,6 +45,7 @@ export class SeedService {
         );
 
         const userPermissionNames = [
+            PermissionNames.READ_USERS,
             PermissionNames.CREATE_POSTS,
             PermissionNames.READ_POSTS,
             PermissionNames.UPDATE_POSTS,
