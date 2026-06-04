@@ -21,6 +21,8 @@ type SupportedDbTypes = 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mongodb' 
             driver: ApolloDriver,
             autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
             context: ({ req }) => ({ req }),
+            introspection: true,
+            csrfPrevention: false,
         }),
         TypeOrmModule.forRootAsync({
             imports: [ConfigModule],
