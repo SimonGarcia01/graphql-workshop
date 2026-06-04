@@ -1,0 +1,123 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Permission {
+  id: Int!
+  name: PermissionNames!
+  description: String!
+  rolesPermissions: [RolePermission!]
+}
+
+enum PermissionNames {
+  ADMIN_SUPER_POWER
+  READ_USERS
+  CREATE_POSTS
+  READ_POSTS
+  UPDATE_POSTS
+  DELETE_POSTS
+}
+
+type RolePermission {
+  id: Int!
+  role: Role!
+  permission: Permission!
+}
+
+type Role {
+  id: Int!
+  name: RoleName!
+  description: String!
+  users: [User!]
+  rolesPermissions: [RolePermission!]
+}
+
+enum RoleName {
+  SUPER_ADMIN
+  USER
+}
+
+type Post {
+  id: Int!
+  title: String!
+  content: String!
+  author: User!
+}
+
+type User {
+  id: Int!
+  fullName: String!
+  email: String!
+  isActive: Boolean!
+  role: Role!
+  posts: [Post!]
+}
+
+type AuthResponse {
+  user: User!
+  token: String!
+}
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User!
+  roles: [Role!]!
+  role(id: Int!): Role!
+  permissions: [Permission!]!
+  permission(id: Int!): Permission!
+  RolePermissions: [RolePermission!]!
+  RolePermission(id: Int!): RolePermission!
+  posts: [Post!]!
+  post(id: Int!): Post!
+}
+
+type Mutation {
+  login(loginInput: LoginInput!): AuthResponse!
+  signup(signupInput: SignupInput!): AuthResponse!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  createPost(createPostInput: CreatePostInput!): Post!
+  updatePost(updatePostInput: UpdatePostInput!): Post!
+  removePost(id: Int!): Post!
+  runSeed: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input SignupInput {
+  fullName: String!
+  email: String!
+  password: String!
+}
+
+input CreateUserInput {
+  fullName: String!
+  email: String!
+  password: String!
+  roleName: RoleName
+  isActive: Boolean = true
+}
+
+input UpdateUserInput {
+  fullName: String
+  email: String
+  password: String
+  roleName: RoleName
+  isActive: Boolean = true
+  id: Int!
+}
+
+input CreatePostInput {
+  title: String!
+  content: String!
+}
+
+input UpdatePostInput {
+  title: String
+  content: String
+  id: Int!
+}

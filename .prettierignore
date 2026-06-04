@@ -1,0 +1,14 @@
+node_modules
+dist
+build
+coverage
+.turbo
+*.min.js
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.eslintcache
+.vscode
+/.husky
+/.git
+bun.lock
