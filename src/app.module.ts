@@ -11,6 +11,7 @@ import { SeedModule } from './seed/seed.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './common/guards/auth.guard';
 import { PermissionsGuard } from './common/guards/permission.guard';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 
 type SupportedDbTypes = 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mongodb' | 'oracle';
 
@@ -23,6 +24,8 @@ type SupportedDbTypes = 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mongodb' 
             context: ({ req }) => ({ req }),
             introspection: true,
             csrfPrevention: false,
+            playground: true,
+            plugins: [ApolloServerPluginLandingPageLocalDefault()],
         }),
         TypeOrmModule.forRootAsync({
             imports: [ConfigModule],
